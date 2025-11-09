@@ -40,14 +40,6 @@
       align-items: center;
     }
 
-    .header-logo {
-      height: 44px;
-      width: 44px;
-      border-radius: 10px;
-      object-fit: contain;
-      margin-right: 10px;
-    }
-
     .galaxy-text {
       color: var(--text);
       text-decoration: none;
@@ -207,7 +199,6 @@
       box-shadow: 0 0 30px #a9a9a9;
     }
 
-    /* Auth card styles */
     .auth-wrapper {
       display: flex;
       justify-content: center;
@@ -341,19 +332,16 @@
 
 <body>
   <header>
-    <img class="header-logo" src="/logo.png" alt="Logo" />
     <a href="#home" class="galaxy-text">galaxy</a>
     <div id="menu-button" title="Menu">☰</div>
     <div id="menu" aria-label="Navigation Menu">
       <button data-target="home">Home</button>
       <button data-target="gallery">Gallery</button>
       <button data-target="about">About</button>
-      <!-- Personal button removed -->
     </div>
   </header>
 
   <main>
-    <!-- HOME -->
     <section id="home" class="active">
       <div class="headline-container">
         <div class="headline">GALAXY PHOTOGRAPHY</div>
@@ -362,17 +350,15 @@
       </div>
     </section>
 
-    <!-- GALLERY (kept) -->
     <section id="gallery">
       <h2>Galaxy Photography</h2>
       <div class="gallery">
-        <div class="gallery-item"><img src="public/budhha.jpeg" alt="Photo 1" /></div>
-        <div class="gallery-item"><img src="/photo2.jpg" alt="Photo 2" /></div>
-        <div class="gallery-item"><img src="/photo3.jpg" alt="Photo 3" /></div>
+        <div class="gallery-item"><img src="budhha.jpeg1" alt="Photo 1" /></div>
+        <div class="gallery-item"><img src="public/photo2.jpeg1" alt="Photo 2" /></div>
+        <div class="gallery-item"><img src="public/photo3.jpeg1" alt="Photo 3" /></div>
       </div>
     </section>
 
-    <!-- SIGN IN (kept; text adjusted) -->
     <section id="signin">
       <div class="auth-wrapper">
         <div class="auth-card">
@@ -403,7 +389,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about"></section>
   </main>
 
@@ -415,22 +400,16 @@
   </footer>
 
   <script>
-    // CONFIG: change credentials here
     const AUTH = {
       username: 'galaxy',
       password: 'GALAXY@PERSONAL008800'
     };
 
-    // Elements
     const menuBtn = document.getElementById('menu-button');
     const menu = document.getElementById('menu');
     const sections = document.querySelectorAll('main section');
-
     const galaxyLink = document.querySelector('.galaxy-text');
     const viewGalleryBtn = document.getElementById('view-gallery-button');
-
-    // Sign-in elements
-    const signinSection = document.getElementById('signin');
     const siUser = document.getElementById('si-username');
     const siPass = document.getElementById('si-password');
     const siToggle = document.getElementById('si-toggle');
@@ -439,7 +418,6 @@
     const signinSuccess = document.getElementById('signin-success');
     const signinBackHome = document.getElementById('signin-back-home');
 
-    // Helpers
     const showSection = (id) => {
       sections.forEach(s => s.style.display = (s.id === id) ? 'block' : 'none');
       sections.forEach(s => s.classList.toggle('active', s.id === id));
@@ -449,10 +427,8 @@
       menuBtn.classList.remove('active');
     };
 
-    // Initial
     showSection('home');
 
-    // Hamburger toggle
     menuBtn.addEventListener('click', () => {
       menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
       menuBtn.classList.toggle('active');
@@ -461,14 +437,10 @@
       if (!menu.contains(e.target) && !menuBtn.contains(e.target)) closeMenu();
     });
 
-    // Brand -> Home
     galaxyLink.addEventListener('click', (e) => { e.preventDefault(); showSection('home'); closeMenu(); });
-
-    // Home CTA -> Gallery
     viewGalleryBtn.addEventListener('click', () => { showSection('gallery'); closeMenu(); });
     viewGalleryBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); viewGalleryBtn.click(); } });
 
-    // Menu routing (Personal removed)
     menu.querySelectorAll('button').forEach(btn => {
       const target = btn.getAttribute('data-target');
       btn.addEventListener('click', (e) => {
@@ -479,14 +451,12 @@
       btn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } });
     });
 
-    // Toggle password visibility
     siToggle.addEventListener('click', () => {
       if (siPass.type === 'password') { siPass.type = 'text'; siToggle.textContent = 'Hide'; }
       else { siPass.type = 'password'; siToggle.textContent = 'Show'; }
       siPass.focus();
     });
 
-    // Sign-in logic (no Personal navigation)
     const trySignin = () => {
       const u = siUser.value.trim();
       const p = siPass.value.trim();
@@ -509,11 +479,8 @@
     signinBtn.addEventListener('click', trySignin);
     siPass.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); trySignin(); } });
     siUser.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); siPass.focus(); } });
-
-    // Back to Home from sign-in
     signinBackHome.addEventListener('click', (e) => { e.preventDefault(); showSection('home'); });
 
-    // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
     document.querySelectorAll('.gallery-item img').forEach(img => {
