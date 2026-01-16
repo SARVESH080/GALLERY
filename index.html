@@ -365,26 +365,11 @@ section.active{display:block;}
 }
 
 /* ================= GALLERY GRID ================= */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 images per row (desktop) */
-  gap: 24px;
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .gallery {
-    grid-template-columns: repeat(3, 1fr); /* 3 images */
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 images */
-  }
-}
-
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:30px;
+  justify-items:center;
 }
 
 .gallery-item{
