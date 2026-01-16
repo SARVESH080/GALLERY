@@ -621,6 +621,15 @@ footer a:hover {
   min-height: 100vh;
   overflow: hidden;
 }
+  /* FORCE section visibility control */
+section {
+  display: none !important;
+}
+
+section.active {
+  display: block !important;
+}
+
 
 </style>
 </head>
@@ -791,5 +800,6 @@ document.addEventListener('keydown', (e) => {
 
 </body>
 </html>
+
 
 
