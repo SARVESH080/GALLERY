@@ -1,219 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galaxy Photography | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galaxy Photography | Portfolio</title>
 
-  <meta name="description" content="Professional photography portfolio showcasing fine art, street, and cosmic photography." />
+<meta name="description" content="Galaxy Photography – Professional photography portfolio showcasing fine art, street and cosmic photography.">
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap');
 
-    :root{
-      --teal:#66cccc;
-      --text:#ffffff;
-      --muted:#b5b5b5;
-      --bg:rgba(0,0,0,0.85);
-    }
+/* ================= ROOT ================= */
+:root{
+  --teal:#66cccc;
+  --text:#ffffff;
+  --muted:#bdbdbd;
+  --card-bg:rgba(255,255,255,0.04);
+}
 
-    body{
+/* ================= BODY / BACKGROUND ================= */
+body{
   margin:0;
   font-family:Arial, sans-serif;
-  color:#ffffff;
+  color:var(--text);
   min-height:100vh;
   display:flex;
   flex-direction:column;
 
-  background:linear-gradient(180deg, #0a0a0a, #000000);
-    }
+  background:
+    radial-gradient(circle at top, rgba(102,204,204,0.15), transparent 40%),
+    radial-gradient(circle at bottom, rgba(255,255,255,0.06), transparent 40%),
+    linear-gradient(180deg, #050505, #0b0b0b 40%, #000);
+}
 
-    /* HEADER */
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:16px 32px;
-      font-family:'Orbitron',sans-serif;
-      font-size:28px;
-    }
+/* ================= HEADER ================= */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 28px;
+}
 
-    .galaxy-text{
-      color:#fff;
-      text-decoration:none;
-    }
+header a{
+  font-family:'Orbitron',sans-serif;
+  font-size:26px;
+  text-decoration:none;
+  color:#fff;
+}
 
-    #menu-button{
-      font-size:28px;
-      cursor:pointer;
-    }
+#menu-button{
+  font-size:28px;
+  cursor:pointer;
+}
 
-    #menu{
-      display:none;
-      position:absolute;
-      top:70px;
-      right:32px;
-      background:var(--bg);
-      border-radius:10px;
-      overflow:hidden;
-      z-index:1000;
-    }
+#menu{
+  display:none;
+  position:absolute;
+  top:70px;
+  right:28px;
+  background:rgba(0,0,0,0.9);
+  border-radius:12px;
+  overflow:hidden;
+  z-index:1000;
+}
 
-    #menu button{
-      background:none;
-      border:none;
-      color:#fff;
-      padding:14px 24px;
-      font-size:16px;
-      cursor:pointer;
-      width:100%;
-      text-align:left;
-    }
+#menu button{
+  background:none;
+  border:none;
+  color:#fff;
+  padding:14px 26px;
+  font-size:16px;
+  cursor:pointer;
+  width:100%;
+  text-align:left;
+}
 
-    #menu button:hover{
-      background:#444;
-    }
+#menu button:hover{
+  background:#333;
+}
 
-    main{
-      flex-grow:1;
-      width:90%;
-      max-width:1200px;
-      margin:0 auto;
-    }
+/* ================= MAIN ================= */
+main{
+  flex-grow:1;
+  width:90%;
+  max-width:1200px;
+  margin:0 auto;
+}
 
-    section{display:none;}
-    section.active{display:block;}
+section{display:none;}
+section.active{display:block;}
 
-    /* HERO */
-    .hero{
-      min-height:70vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
+/* ================= HERO ================= */
+.hero{
+  min-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    .hero h1{
-      font-family:'Orbitron',sans-serif;
-      font-size:64px;
-      letter-spacing:3px;
-      margin:0;
-    }
+.hero h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:64px;
+  letter-spacing:3px;
+  margin:0;
+}
 
-    .hero p{
-      color:var(--muted);
-      font-size:18px;
-      margin-top:12px;
-    }
+.hero p{
+  color:var(--muted);
+  margin-top:12px;
+  font-size:18px;
+}
 
-    .view-button{
-      margin-top:30px;
-      padding:14px 36px;
-      font-size:18px;
-      font-weight:700;
-      border-radius:10px;
-      border:2px solid var(--teal);
-      background:rgba(102,204,204,0.15);
-      color:var(--teal);
-      cursor:pointer;
-    }
+.view-button{
+  margin-top:32px;
+  padding:14px 36px;
+  border-radius:10px;
+  border:2px solid var(--teal);
+  background:rgba(102,204,204,0.15);
+  color:var(--teal);
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    .view-button:hover{
-      background:var(--teal);
-      color:#001f1f;
-    }
+.view-button:hover{
+  background:var(--teal);
+  color:#001f1f;
+}
 
-    /* GALLERY */
-    #gallery h2{
-      font-family:'Orbitron',sans-serif;
-      margin:40px 0 20px;
-    }
+/* ================= GALLERY ================= */
+#gallery h2{
+  font-family:'Orbitron',sans-serif;
+  margin:40px 0 20px;
+  text-align:center;
+}
 
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-      gap:24px;
-    }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
+  justify-items:center;
+}
 
-    .gallery-item{
-      border-radius:16px;
-      overflow:hidden;
-      background:#000;
-    }
+.gallery-item{
+  width:100%;
+  max-width:320px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#000;
+}
 
-    .gallery-item img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:transform .6s ease;
-      cursor:pointer;
-    }
+.gallery-item img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  transition:transform .5s ease;
+  cursor:pointer;
+}
 
-    .gallery-item:hover img{
-      transform:scale(1.08);
-    }
+.gallery-item:hover img{
+  transform:scale(1.08);
+}
 
-    /* ABOUT */
-    .about-card{
-      background:var(--bg);
-      max-width:600px;
-      margin:80px auto;
-      padding:30px;
-      border-radius:16px;
-      text-align:center;
-    }
+/* ================= ABOUT ================= */
+.about-card{
+  max-width:620px;
+  margin:80px auto;
+  padding:32px;
+  border-radius:18px;
+  background:var(--card-bg);
+  backdrop-filter:blur(6px);
+  text-align:center;
+}
 
-    .about-card h3{
-      font-family:'Orbitron',sans-serif;
-      margin-bottom:10px;
-    }
+.about-card h3{
+  font-family:'Orbitron',sans-serif;
+  margin-bottom:12px;
+}
 
-    .about-card p{
-      color:#ddd;
-      line-height:1.7;
-    }
+.about-card p{
+  color:#ddd;
+  line-height:1.7;
+  font-size:15px;
+}
 
-    /* LIGHTBOX */
-    #lightbox{
-      position:fixed;
-      inset:0;
-      display:none;
-      background:rgba(0,0,0,0.9);
-      justify-content:center;
-      align-items:center;
-      z-index:2000;
-    }
+/* ================= LIGHTBOX ================= */
+#lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
 
-    #lightbox img{
-      max-width:90vw;
-      max-height:90vh;
-      border-radius:12px;
-    }
+#lightbox img{
+  max-width:90vw;
+  max-height:90vh;
+  border-radius:14px;
+}
 
-    footer{
-      text-align:center;
-      padding:18px;
-      color:#aaa;
-      background:rgba(0,0,0,0.7);
-    }
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:18px;
+  background:rgba(0,0,0,0.7);
+  color:#aaa;
+}
 
-    footer a{
-      color:#ccc;
-      text-decoration:none;
-      font-weight:bold;
-    }
+footer a{
+  color:#ccc;
+  font-weight:bold;
+  text-decoration:none;
+}
 
-    @media(max-width:768px){
-      .hero h1{font-size:42px;}
-    }
-  </style>
+/* ================= MOBILE OPTIMIZATION ================= */
+@media(max-width:768px){
+  header{
+    padding:14px 20px;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .gallery{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .gallery-item img{
+    height:180px;
+  }
+
+  .about-card{
+    margin:50px 16px;
+    padding:24px;
+  }
+}
+
+@media(max-width:480px){
+  .gallery{
+    grid-template-columns:1fr;
+  }
+
+  .gallery-item{
+    max-width:100%;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <a href="#" class="galaxy-text">Galaxy</a>
+  <a href="#">Galaxy</a>
   <div id="menu-button">☰</div>
   <div id="menu">
     <button data-target="home">Home</button>
@@ -224,94 +271,92 @@
 
 <main>
 
-  <!-- HOME -->
-  <section id="home" class="active">
-    <div class="hero">
-      <h1>Galaxy Photography</h1>
-      <p>Fine Art • Street • Cosmic Moments</p>
-      <button class="view-button" id="view-gallery-button">
-        View Portfolio →
-      </button>
-    </div>
-  </section>
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <h1>Galaxy Photography</h1>
+    <p>Fine Art • Street • Cosmic Moments</p>
+    <button class="view-button" id="view-gallery-button">
+      View Portfolio →
+    </button>
+  </div>
+</section>
 
-  <!-- GALLERY -->
-  <section id="gallery">
-    <h2>Portfolio</h2>
-    <div class="gallery">
-      <div class="gallery-item"><img src="budhha.jpeg" loading="lazy"></div>
-      <div class="gallery-item"><img src="photo2.jpeg" loading="lazy"></div>
-      <div class="gallery-item"><img src="photo3.jpeg" loading="lazy"></div>
-    </div>
-  </section>
+<!-- GALLERY -->
+<section id="gallery">
+  <h2>Portfolio</h2>
+  <div class="gallery">
+    <div class="gallery-item"><img src="budhha.jpeg" loading="lazy"></div>
+    <div class="gallery-item"><img src="photo2.jpeg" loading="lazy"></div>
+    <div class="gallery-item"><img src="photo3.jpeg" loading="lazy"></div>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-card">
-      <h3>About Me</h3>
-      <p>
-        I’m a passionate photographer capturing emotion, light,
-        and stories through my lens — from serene spiritual moments
-        to the beauty of the cosmos.
-      </p>
-      <p>
-        📍 India<br>
-        📸 DSLR & Mobile Photography<br>
-        🌌 Street • Portrait • Nature
-      </p>
-    </div>
-  </section>
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-card">
+    <h3>About Me</h3>
+    <p>
+      I’m a passionate photographer capturing emotion, light and stories
+      through my lens — from serene spiritual moments to the beauty of the cosmos.
+    </p>
+    <p>
+      📍 India<br>
+      📸 DSLR & Mobile Photography<br>
+      🌌 Street • Portrait • Nature
+    </p>
+  </div>
+</section>
 
 </main>
 
+<!-- LIGHTBOX -->
 <div id="lightbox">
   <img src="" alt="">
 </div>
 
 <footer>
   Follow me on
-  <a href="https://www.instagram.com/galaxyphotography88" target="_blank">
-    Instagram
-  </a>
+  <a href="https://www.instagram.com/galaxyphotography88" target="_blank">Instagram</a>
 </footer>
 
 <script>
-  const menuBtn = document.getElementById('menu-button');
-  const menu = document.getElementById('menu');
-  const sections = document.querySelectorAll('main section');
-  const viewGalleryBtn = document.getElementById('view-gallery-button');
+const menuBtn = document.getElementById('menu-button');
+const menu = document.getElementById('menu');
+const sections = document.querySelectorAll('main section');
+const viewGalleryBtn = document.getElementById('view-gallery-button');
 
-  function showSection(id){
-    sections.forEach(s=>{
-      s.classList.toggle('active', s.id === id);
-    });
-    menu.style.display='none';
-  }
+function showSection(id){
+  sections.forEach(s=>s.classList.toggle('active', s.id===id));
+  menu.style.display='none';
+}
 
-  menuBtn.onclick=()=> {
-    menu.style.display = menu.style.display==='block'?'none':'block';
+menuBtn.onclick=()=> {
+  menu.style.display = menu.style.display==='block'?'none':'block';
+};
+
+menu.querySelectorAll('button').forEach(btn=>{
+  btn.onclick=()=>showSection(btn.dataset.target);
+});
+
+viewGalleryBtn.onclick=()=>showSection('gallery');
+
+/* Lightbox */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=lightbox.querySelector('img');
+
+document.querySelectorAll('.gallery img').forEach(img=>{
+  img.onclick=()=>{
+    lightbox.style.display='flex';
+    lightboxImg.src=img.src;
   };
+});
 
-  menu.querySelectorAll('button').forEach(btn=>{
-    btn.onclick=()=>showSection(btn.dataset.target);
-  });
-
-  viewGalleryBtn.onclick=()=>showSection('gallery');
-
-  // Lightbox
-  const lightbox=document.getElementById('lightbox');
-  const lightboxImg=lightbox.querySelector('img');
-
-  document.querySelectorAll('.gallery img').forEach(img=>{
-    img.onclick=()=>{
-      lightbox.style.display='flex';
-      lightboxImg.src=img.src;
-    };
-  });
-
-  lightbox.onclick=()=>lightbox.style.display='none';
+lightbox.onclick=()=>{
+  lightbox.style.display='none';
+  lightboxImg.src='';
+};
 </script>
 
 </body>
 </html>
-
