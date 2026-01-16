@@ -217,7 +217,7 @@ section.active{display:block;}
   content: '';
   position: absolute;
   inset: 0;
-  background: url('mountain.jpg') center/cover;
+  background: url('mountain.jpg') center/cover no-repeat;
   opacity: 0.25;
   animation: slowZoom 30s ease-in-out infinite;
 }
@@ -656,9 +656,9 @@ footer a:hover {
 <section id="gallery">
   <h2>Portfolio</h2>
   <div class="gallery">
-    <div class="gallery-item"><img src="budhha.jpeg" alt="Photography" loading="lazy"></div>
-    <div class="gallery-item"><img src="mountain.jpg" alt="Photography" loading="lazy"></div>
-    <div class="gallery-item"><img src="photo3.jpeg" alt="Photography" loading="lazy"></div>
+    <div class="gallery-item"><img src="budhha.jpeg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load budhha.jpeg')"></div>
+    <div class="gallery-item"><img src="mountain.jpg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load mountain.jpg')"></div>
+    <div class="gallery-item"><img src="photo3.jpeg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load photo3.jpeg')"></div>
   </div>
 </section>
 
@@ -787,4 +787,3 @@ document.addEventListener('keydown', (e) => {
 
 </body>
 </html>
-
