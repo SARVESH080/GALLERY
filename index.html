@@ -42,12 +42,7 @@ body{
   position: fixed;
   inset: 0;
   z-index: -1;
-  background:
-    radial-gradient(circle at 20% 50%, rgba(102,204,204,0.15), transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(157,78,221,0.12), transparent 50%),
-    radial-gradient(circle at 60% 20%, rgba(0,255,255,0.08), transparent 40%),
-    #000000;
-  animation: bgShift 20s ease-in-out infinite;
+  background: #000000;
 }
 
 @keyframes bgShift {
@@ -300,20 +295,6 @@ section.active{display:block;}
   font-size:20px;
   font-weight:300;
   letter-spacing:2px;
-  min-height: 30px;
-}
-
-/* Typing cursor */
-#typing-text::after {
-  content: '|';
-  color: var(--teal);
-  animation: blink 0.8s infinite;
-  margin-left: 2px;
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
 }
 
 .hero-subtitle {
@@ -358,70 +339,6 @@ section.active{display:block;}
   border-color: var(--teal-glow);
   box-shadow: 0 0 40px rgba(102,204,204,0.6);
   transform: translateY(-3px);
-}
-
-/* ================= SCROLL INDICATOR ================= */
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  animation: fadeInUp 1s ease 2s forwards;
-  opacity: 0;
-  z-index: 3;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
-  }
-}
-
-.mouse {
-  width: 26px;
-  height: 40px;
-  border: 2px solid var(--teal);
-  border-radius: 20px;
-  margin: 0 auto 10px;
-  position: relative;
-  box-shadow: 0 0 20px rgba(102,204,204,0.3);
-}
-
-.wheel {
-  width: 4px;
-  height: 8px;
-  background: var(--teal);
-  border-radius: 2px;
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: scroll 1.5s infinite;
-}
-
-@keyframes scroll {
-  0% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(16px);
-  }
-}
-
-.scroll-indicator p {
-  color: var(--muted);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;
 }
 
 /* ================= GALLERY ================= */
@@ -872,17 +789,11 @@ section.active {
     <div class="mist-layer"></div>
     <div class="hero-content">
       <h1>Galaxy Photography</h1>
-      <p id="typing-text"></p>
+      <p>Fine Art • Street • Cosmic Moments</p>
       <div class="hero-subtitle">Capturing Stories Through Light</div>
       <button class="view-button" id="view-gallery-button">
         View Portfolio →
       </button>
-    </div>
-    <div class="scroll-indicator">
-      <div class="mouse">
-        <div class="wheel"></div>
-      </div>
-      <p>Scroll to explore</p>
     </div>
   </div>
 </section>
@@ -966,33 +877,13 @@ function createParticles() {
 
 createParticles();
 
-// Typing animation
-const typingText = document.getElementById('typing-text');
-const textToType = 'Fine Art • Street • Cosmic Moments';
-let charIndex = 0;
-
-function typeText() {
-  if (charIndex < textToType.length) {
-    typingText.textContent = textToType.substring(0, charIndex + 1);
-    charIndex++;
-    setTimeout(typeText, 100);
-  }
-}
-
-// Start typing after a brief delay
-setTimeout(typeText, 500);
-
 // Header scroll effect
 window.addEventListener('scroll', () => {
   const header = document.querySelector('header');
-  const scrollIndicator = document.querySelector('.scroll-indicator');
-  
   if(window.scrollY > 50) {
     header.classList.add('scrolled');
-    if(scrollIndicator) scrollIndicator.style.opacity = '0';
   } else {
     header.classList.remove('scrolled');
-    if(scrollIndicator) scrollIndicator.style.opacity = '1';
   }
 });
 
