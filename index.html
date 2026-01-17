@@ -380,9 +380,9 @@ section.active{display:block;}
   overflow:hidden;
   background:#111;
   position:relative;
-}
-
-  
+  border: 2px solid rgba(102,204,204,0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
 }
 
 .gallery-item::before {
@@ -394,7 +394,6 @@ section.active{display:block;}
   transition: opacity 0.4s ease;
   z-index: 1;
   pointer-events: none;
-  
 }
 
 .gallery-item:hover::before {
@@ -410,12 +409,10 @@ section.active{display:block;}
 .gallery-item img{
   width:100%;
   height:100%;
-  object-fit:cover;      /* 🔥 key */
-  object-position:center; /* 🔥 center crop */
+  object-fit:cover;
+  object-position:center;
   display:block;
   transition:transform .6s ease;
-}
-
 }
 
 .gallery-item:hover img{
@@ -622,11 +619,13 @@ footer a:hover {
 .loading {
   animation: pulse 1.5s ease-in-out infinite;
 }
-  #home {
+
+#home {
   min-height: 100vh;
   overflow: hidden;
 }
-  /* FORCE section visibility control */
+
+/* FORCE section visibility control */
 section {
   display: none !important;
 }
@@ -634,7 +633,6 @@ section {
 section.active {
   display: block !important;
 }
-
 
 </style>
 </head>
@@ -681,7 +679,8 @@ section.active {
      <div class="gallery-item"><img src="images/leaf.jpeg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load photo3.jpeg')"></div>
   </div>
 </section>
-  <!-- ABOUT -->
+
+<!-- ABOUT -->
 <section id="about">
   <div class="about-card">
     <h3>About Me</h3>
@@ -806,18 +805,3 @@ document.addEventListener('keydown', (e) => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
