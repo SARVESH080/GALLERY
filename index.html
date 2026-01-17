@@ -37,12 +37,34 @@ body{
   position:relative;
 }
 
+.bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
 /* Animated gradient background */
 .bg-wrapper {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 100%;
   z-index: -1;
-  background: #000000;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(102,204,204,0.15), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(157,78,221,0.12), transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(0,255,255,0.08), transparent 40%),
+    #000000;
+  animation: bgShift 20s ease-in-out infinite;
 }
 
 @keyframes bgShift {
@@ -862,6 +884,34 @@ section.active {
 </footer>
 
 <script>
+// Extend background to match page height
+function updateBackgroundHeight() {
+  const bgWrapper = document.querySelector('.bg-wrapper');
+  const body = document.body;
+  const html = document.documentElement;
+  const height = Math.max(
+    body.scrollHeight,
+    body.offsetHeight,
+    html.clientHeight,
+    html.scrollHeight,
+    html.offsetHeight
+  );
+  bgWrapper.style.height = height + 'px';
+}
+
+// Update on load and when sections change
+updateBackgroundHeight();
+window.addEventListener('resize', updateBackgroundHeight);
+
+// Update when switching sections
+const observer = new MutationObserver(updateBackgroundHeight);
+observer.observe(document.querySelector('main'), { 
+  childList: true, 
+  subtree: true, 
+  attributes: true,
+  attributeFilter: ['class']
+});
+
 // Create floating particles
 function createParticles() {
   const particleCount = 30;
