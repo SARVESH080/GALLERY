@@ -523,11 +523,32 @@ section.active{display:block;}
 .lightbox-layout {
   display: flex;
   gap: 40px;
-  background: rgba(20,20,20,0.95);
-  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(15,15,35,0.98) 0%, rgba(25,15,35,0.98) 50%, rgba(15,25,40,0.98) 100%);
+  border-radius: 24px;
   overflow: hidden;
-  border: 2px solid rgba(102,204,204,0.3);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  position: relative;
   max-height: 85vh;
+}
+
+.lightbox-layout::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, var(--teal-glow) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
 .lightbox-image {
@@ -535,24 +556,53 @@ section.active{display:block;}
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
-  padding: 20px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(10,5,15,0.95) 100%);
+  padding: 30px;
+  position: relative;
+}
+
+.lightbox-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(102,204,204,0.08) 0%, transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(157,78,221,0.06) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .lightbox-image img {
   max-width: 100%;
   max-height: 75vh;
   object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(102,204,204,0.4);
+  border-radius: 16px;
+  box-shadow: 
+    0 0 40px rgba(102,204,204,0.3),
+    0 0 80px rgba(157,78,221,0.2),
+    0 20px 60px rgba(0,0,0,0.6);
+  border: 2px solid rgba(102,204,204,0.2);
+  position: relative;
+  z-index: 1;
 }
 
 .lightbox-description {
   flex: 0 0 350px;
   padding: 40px;
   overflow-y: auto;
-  background: rgba(10,10,10,0.8);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(20,10,30,0.9) 0%, rgba(10,15,25,0.95) 100%);
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.lightbox-description::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--teal) 0%, var(--accent-purple) 100%);
+  box-shadow: 0 0 20px var(--teal);
 }
 
 .lightbox-description h3 {
