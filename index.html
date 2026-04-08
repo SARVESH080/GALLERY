@@ -37,16 +37,33 @@ body{
   position:relative;
 }
 
+.bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
 /* Animated gradient background */
 .bg-wrapper {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 100%;
   z-index: -1;
   background:
     radial-gradient(circle at 20% 50%, rgba(102,204,204,0.15), transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(157,78,221,0.12), transparent 50%),
     radial-gradient(circle at 60% 20%, rgba(0,255,255,0.08), transparent 40%),
-    linear-gradient(180deg, #000000, #0a0a0a 40%, #000000);
+    #000000;
   animation: bgShift 20s ease-in-out infinite;
 }
 
@@ -348,7 +365,7 @@ section.active{display:block;}
 
 /* ================= GALLERY ================= */
 #gallery {
-  padding: 60px 40px;
+  padding: 60px 40px 80px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -421,7 +438,7 @@ section.active{display:block;}
 
 /* ================= ABOUT ================= */
 #about {
-  padding: 80px 40px;
+  padding: 80px 40px 100px;
   min-height: 70vh;
   display: flex;
   align-items: center;
@@ -494,15 +511,147 @@ section.active{display:block;}
   align-items:center;
   z-index:2000;
   animation: fadeIn 0.3s ease;
-  cursor: pointer;
+  padding: 20px;
 }
 
-#lightbox img{
-  max-width:90vw;
-  max-height:90vh;
-  border-radius:20px;
-  box-shadow: 0 20px 80px rgba(102,204,204,0.4);
-  animation: zoomIn 0.4s ease;
+.lightbox-content {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 90vh;
+}
+
+.close-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  color: var(--teal);
+  transform: rotate(90deg);
+}
+
+.lightbox-layout {
+  display: flex;
+  gap: 40px;
+  background: linear-gradient(135deg, rgba(15,15,35,0.98) 0%, rgba(25,15,35,0.98) 50%, rgba(15,25,40,0.98) 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  max-height: 85vh;
+}
+
+.lightbox-layout::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--accent-purple) 50%, var(--teal-glow) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.lightbox-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(10,5,15,0.95) 100%);
+  padding: 30px;
+  position: relative;
+}
+
+.lightbox-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(102,204,204,0.08) 0%, transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(157,78,221,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.lightbox-image img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 
+    0 0 40px rgba(102,204,204,0.3),
+    0 0 80px rgba(157,78,221,0.2),
+    0 20px 60px rgba(0,0,0,0.6);
+  border: 2px solid rgba(102,204,204,0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.lightbox-description {
+  flex: 0 0 350px;
+  padding: 40px;
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(20,10,30,0.9) 0%, rgba(10,15,25,0.95) 100%);
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.lightbox-description::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--teal) 0%, var(--accent-purple) 100%);
+  box-shadow: 0 0 20px var(--teal);
+}
+
+.lightbox-description h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  color: var(--teal);
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(102,204,204,0.5);
+}
+
+.lightbox-description p {
+  color: #ddd;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* Mobile lightbox */
+@media(max-width: 768px) {
+  .lightbox-layout {
+    flex-direction: column;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .lightbox-description {
+    flex: 0 0 auto;
+    padding: 30px 20px;
+  }
+  
+  .lightbox-image img {
+    max-height: 50vh;
+  }
 }
 
 @keyframes zoomIn {
@@ -520,10 +669,12 @@ section.active{display:block;}
 footer{
   text-align:center;
   padding:30px;
-  background:rgba(0,0,0,0.9);
+  background:#000000;
   color:#aaa;
   border-top: 1px solid rgba(102,204,204,0.1);
   font-size: 14px;
+  margin-top: auto;
+  width: 100%;
 }
 
 footer a{
@@ -673,10 +824,21 @@ section.active {
 <section id="gallery">
   <h2>Portfolio</h2>
   <div class="gallery">
-    <div class="gallery-item"><img src="images/budhha.jpeg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load budhha.jpeg')"></div>
-    <div class="gallery-item"><img src="images/mountain2.jpg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load mountain.jpg')"></div>
-    <div class="gallery-item"><img src="images/rose.jpeg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load photo3.jpeg')"></div>
-     <div class="gallery-item"><img src="images/leaf.jpeg" alt="Photography" loading="lazy" onerror="this.parentElement.style.border='2px solid red';console.log('Failed to load photo3.jpeg')"></div>
+    <div class="gallery-item" data-title="Sacred Buddha" data-desc="A beautiful handcrafted Buddha statue adorned with intricate beadwork and traditional ornaments. This piece represents peace, meditation, and spiritual enlightenment.">
+      <img src="images/budhha.jpeg" alt="Sacred Buddha" loading="lazy">
+    </div>
+    <div class="gallery-item" data-title="Mountain Serenity" data-desc="Majestic mountain peaks captured during golden hour, showcasing nature's raw beauty and the peaceful solitude of high altitudes.">
+      <img src="images/mountain2.jpg" alt="Mountain Serenity" loading="lazy">
+    </div>
+    <div class="gallery-item" data-title="Rose Elegance" data-desc="A delicate rose captured in stunning detail, highlighting the soft petals and vibrant colors that symbolize love and beauty.">
+      <img src="images/rose.jpeg" alt="Rose Elegance" loading="lazy">
+    </div>
+    <div class="gallery-item" data-title="Nature's Detail" data-desc="A close-up view of a leaf showcasing the intricate patterns and textures found in nature's smallest details.">
+      <img src="images/leaf.jpeg" alt="Nature's Detail" loading="lazy">
+    </div>
+      <div class="gallery-item" data-title="Nature's Detail" data-desc="The image features a close-up view of flowers, showcasing their intricate details. The focus is on the vibrant red petals and lush green leaves, highlighting the beauty of nature. Various elements like branches and blossoms suggest an outdoor setting, possibly including jasmine blooms among other floral varieties.">
+      <img src="images/moutain2.jpeg" alt="Nature's Detail" loading="lazy">
+    </div>
   </div>
 </section>
 
@@ -703,7 +865,18 @@ section.active {
 
 <!-- LIGHTBOX -->
 <div id="lightbox">
-  <img src="" alt="Enlarged view">
+  <div class="lightbox-content">
+    <span class="close-btn">&times;</span>
+    <div class="lightbox-layout">
+      <div class="lightbox-image">
+        <img src="" alt="Enlarged view">
+      </div>
+      <div class="lightbox-description">
+        <h3 id="lightbox-title">Image Title</h3>
+        <p id="lightbox-desc">Image description goes here...</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -714,6 +887,34 @@ section.active {
 </footer>
 
 <script>
+// Extend background to match page height
+function updateBackgroundHeight() {
+  const bgWrapper = document.querySelector('.bg-wrapper');
+  const body = document.body;
+  const html = document.documentElement;
+  const height = Math.max(
+    body.scrollHeight,
+    body.offsetHeight,
+    html.clientHeight,
+    html.scrollHeight,
+    html.offsetHeight
+  );
+  bgWrapper.style.height = height + 'px';
+}
+
+// Update on load and when sections change
+updateBackgroundHeight();
+window.addEventListener('resize', updateBackgroundHeight);
+
+// Update when switching sections
+const observer = new MutationObserver(updateBackgroundHeight);
+observer.observe(document.querySelector('main'), { 
+  childList: true, 
+  subtree: true, 
+  attributes: true,
+  attributeFilter: ['class']
+});
+
 // Create floating particles
 function createParticles() {
   const particleCount = 30;
@@ -776,21 +977,39 @@ document.addEventListener('click', (e) => {
 });
 
 /* Lightbox */
-const lightbox=document.getElementById('lightbox');
-const lightboxImg=lightbox.querySelector('img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.querySelector('.lightbox-image img');
+const lightboxTitle = document.getElementById('lightbox-title');
+const lightboxDesc = document.getElementById('lightbox-desc');
+const closeBtn = document.querySelector('.close-btn');
 
-document.querySelectorAll('.gallery img').forEach(img=>{
-  img.onclick=()=>{
-    lightbox.style.display='flex';
-    lightboxImg.src=img.src;
-    document.body.style.overflow='hidden';
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.onclick = () => {
+    const img = item.querySelector('img');
+    const title = item.dataset.title;
+    const desc = item.dataset.desc;
+    
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+    lightboxTitle.textContent = title;
+    lightboxDesc.textContent = desc;
+    document.body.style.overflow = 'hidden';
   };
 });
 
-lightbox.onclick=()=>{
-  lightbox.style.display='none';
-  lightboxImg.src='';
-  document.body.style.overflow='auto';
+closeBtn.onclick = (e) => {
+  e.stopPropagation();
+  lightbox.style.display = 'none';
+  lightboxImg.src = '';
+  document.body.style.overflow = 'auto';
+};
+
+lightbox.onclick = (e) => {
+  if(e.target === lightbox) {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+    document.body.style.overflow = 'auto';
+  }
 };
 
 // Keyboard navigation
@@ -805,3 +1024,6 @@ document.addEventListener('keydown', (e) => {
 
 </body>
 </html>
+
+
+
